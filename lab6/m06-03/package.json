@@ -1,0 +1,14 @@
+{
+  "name": "m06-03reut",
+  "version": "0.0.1",
+  "description": "sendd mail",
+  "main": "m06-03.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "sendmail": "^1.6.1"
+  }
+}

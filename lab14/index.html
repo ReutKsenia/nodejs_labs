@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function Get() {
+            console.log('GET');
+            fetch('http://localhost:3000/api/pulpits', {
+                method: 'GET', mode: 'no-cors',
+                headers: {'Content-Type':'application/json', 'Accept':'application/json'}
+            })
+                .then(response => response.json())
+                .then(pdata => {
+                    result.innerHTML = '';
+                    console.log('pdata', pdata);
+                    if(pdata.code !== undefined) {
+                        alert(pdata.code + ' ' + pdata.err_mes);
+                    } else {
+                        let content = '<table class="table"><thead><tr>' +
+                            '      <th scope="col">pulpit</th>\n' +
+                            '      <th scope="col">name</th>\n' +
+                            '      <th scope="col">faculty</th>\n' +
+                            '    </tr></thead><tbody>\n';
+                        for (let i = 0; i < pdata.length; i++) {
+                            content += '<tr><td>' + pdata[i].PULPIT + '</td><td>' + pdata[i].PULPIT_NAME + '</td><td>' + pdata[i].FACULTY + '</td></tr>';
+                        }
+                        result.innerHTML += content + '</tbody></table>';
+                    }
+                });
+        }
+
+        function Post() {
+            console.log('POST');
+            fetch('http://localhost:3000/api/pulpits', {
+                method: 'POST', mode: 'no-cors',
+                headers: {'Content-Type':'application/json', 'Accept':'application/json'},
+                body: JSON.stringify({pulpit: pulpit.value, pulpit_name: pulpit_name.value, faculty: faculty.value})
+            })
+                .then(response => response.json())
+                .then((pdata) => {
+                    if(pdata.code != undefined) {
+                        alert(pdata.code + ' ' + pdata.err_mes);
+                    } else
+                        console.log('POST.pdata', pdata);
+                });
+        }
+
+        function Delete() {
+            console.log('DELETE');
+            fetch('http://localhost:3000/api/pulpits/' + pulpit.value, {
+                method: 'DELETE'
+            })
+                .then(response => response.json())
+                .then((pdata) => {
+                    if(pdata.code != undefined) {
+                        alert(pdata.code + ' ' + pdata.err_mes);
+                    } else
+                        console.log('DELETE.pdata', pdata);
+                });
+        }
+
+        function Put() {
+            console.log('PUT');
+            fetch('http://localhost:3000/api/pulpits', {
+                method: 'PUT',
+                headers: {'Content-Type':'application/json', 'Accept':'application/json'},
+                body: JSON.stringify({pulpit: pulpit.value, pulpit_name: pulpit_name.value, faculty: faculty.value})
+            })
+                .then(response => response.json())
+                .then((pdata) => {
+                    if(pdata.code != undefined) {
+                        alert(pdata.code + ' ' + pdata.err_mes);
+                    } else
+                        console.log('PUT.pdata', pdata);
+                });
+        }
+    </script>
+</head>
+<body>
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-sm">
+            <div class="input-group mb-3">
+                <input id="pulpit" type="text" class="form-control" placeholder="pulpit" aria-label="pulpit" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+                <input id="pulpit_name" type="text" class="form-control" placeholder="name" aria-label="name" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+                <input id="faculty" type="text" class="form-control" placeholder="faculty" aria-label="faculty" aria-describedby="basic-addon1">
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-start">
+        <div class="col">
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-outline-primary" onclick="Post()">POST</button>
+                <button type="button" class="btn btn-outline-success" onclick="Get()">GET</button>
+                <button type="button" class="btn btn-outline-danger" Onclick="Put()">PUT</button>
+                <button type="button" class="btn btn-outline-warning" onclick="Delete()">DELETE</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm mt-3" id="result"></div>
+    </div>
+</div>
+</body>
+</html>

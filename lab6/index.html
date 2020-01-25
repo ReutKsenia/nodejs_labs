@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Email Sender</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <h1>New Email</h1>
+        <div class="container">
+            <div class="row">
+                <label class="col-1">From</label>
+                <input id="from" class="col-3" type="email" placeholder="example@mail.com">
+            </div>
+        </div>
+        <hr />
+        <div class="container">
+            <div class="row">
+                <label class="col-1">To</label>
+                <input id="to" class="col-3" type="email" placeholder="example@mail.com">
+            </div>
+        </div>
+        <hr />
+        <div class="container">
+            <div class="row">
+                <label class="col-1">Message</label>
+                <input id="message" class="col-3" type="text" placeholder="New message">
+            </div>
+        </div>
+        <hr />
+        <div>
+            <button onclick="sendMail()">Send mail!</button>
+        </div>
+    </div>
+
+    <script>
+        function sendMail() {
+            fetch('http://localhost:5000/mail', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    from: document.getElementById('from').value,
+                    to: document.getElementById('to').value,
+                    message: document.getElementById('message').value
+                })
+            }).then(() => alert('Message send'));
+        }
+    </script>
+</body>
+
+</html>

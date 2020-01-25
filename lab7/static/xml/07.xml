@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <student>
+        <name>Олеся</name>
+        <surname>Милешко</surname>
+        <speciality>POIT</speciality>
+        <course>3</course>
+        <group>6</group>
+    </student>
+    <student>
+        <name>Ксения</name>
+        <surname>Реут</surname>
+        <speciality>POIT</speciality>
+        <course>3</course>
+        <group>6</group>
+    </student>
+</root>

@@ -1,0 +1,7 @@
+npm view sendmail
+npm install sendmail
+cd m06-03
+npm init
+npm addu (Username: rieut.ksenia, Password: knopapopa01)
+npm publish 
+npm install m06-03reut
